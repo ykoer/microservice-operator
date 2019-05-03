@@ -1,0 +1,10 @@
+apiVersion: paas.redhat.com/v1alpha1
+kind: MicroService
+metadata:
+  annotations:
+    cert.patrickeasters.com/ipa-managed: 'true'
+  name: product-service
+spec:
+  image: "quay.io/redhatit/spring-boot-mongo-crud"
+  hostname: "productservice.apps.opsme4.os4-sandbox.paas.redhat.com"
+  replicas: 1

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: microservice-operator
+  template:
+    metadata:
+      labels:
+        name: microservice-operator
+    spec:
+      serviceAccountName: microservice-operator
+      containers:
+        - name: microservice-operator
+          # Replace this with the built image name
+          image: quay.io/redhatit/microservice-operator
+          ports:
+          - containerPort: 60000
+            name: metrics
+          command:
+          - microservice-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              value: ""
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "microservice-operator"

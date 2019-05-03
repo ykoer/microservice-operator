@@ -1,0 +1,13 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: microservice-operator
+subjects:
+- kind: ServiceAccount
+  name: microservice-operator
+  # Replace this with the namespace the operator is deployed in.
+  namespace: paas-operators
+roleRef:
+  kind: ClusterRole
+  name: microservice-operator
+  apiGroup: rbac.authorization.k8s.io
